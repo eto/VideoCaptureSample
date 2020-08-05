@@ -8,6 +8,8 @@
 
 import Cocoa
 import SwiftUI
+import AppKit
+import AVFoundation
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -37,3 +39,61 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 }
 
+class PreviewView: NSView {
+    private var captureSession: AVCaptureSession?
+    init() {
+        super.init(frame: .zero)
+
+        var allowedAccess = false
+        let blocker = DispatchGroup()
+        blocker.enter()
+
+        AVCaptureDevice.requestAccess(for: .video) { flag in
+            allowedAccess = flag
+            blocker.leave()
+        }
+        blocker.wait()
+        if !allowedAccess {
+            print("!!! NO ACCESS TO CAMERA")
+            return
+        }
+
+        // setup session
+        let session = AVCaptureSession()
+        session.beginConfiguration()
+
+        // this part might be different in iOS
+        let videoDevice = AVCaptureDevice.default(for: .video)
+
+        guard let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice!),
+            session.canAddInput(videoDeviceInput)
+            else { return }
+        session.addInput(videoDeviceInput)
+        session.commitConfiguration()
+        self.captureSession = session
+
+        // instead of below, use layerClass on iOS
+        self.wantsLayer = true
+        self.layer = AVCaptureVideoPreviewLayer()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer {
+        return layer as! AVCaptureVideoPreviewLayer
+    }
+
+    override func viewDidMoveToSuperview() { // on iOS .didMoveToSuperview
+        super.viewDidMoveToSuperview()
+
+        if nil != self.superview {
+            self.videoPreviewLayer.session = self.captureSession
+            self.videoPreviewLayer.videoGravity = .resizeAspect
+            self.captureSession?.startRunning()
+        } else {
+            self.captureSession?.stopRunning()
+        }
+    }
+}

@@ -8,10 +8,18 @@
 
 import SwiftUI
 
+struct PreviewHolder: NSViewRepresentable {
+    func makeNSView(context: NSViewRepresentableContext<PreviewHolder>) -> PreviewView {
+        PreviewView()
+    }
+    func updateNSView(_ uiView: PreviewView, context: NSViewRepresentableContext<PreviewHolder>) {
+    }
+    typealias NSViewType = PreviewView
+}
+
 struct ContentView: View {
     var body: some View {
-        Text("Hello, World!")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        PreviewHolder()
     }
 }
 

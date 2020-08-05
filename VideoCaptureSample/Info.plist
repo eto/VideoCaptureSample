@@ -30,6 +30,8 @@
 	<string>NSApplication</string>
 	<key>NSSupportsAutomaticTermination</key>
 	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Displays the image from the camera.</string>
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
 </dict>
