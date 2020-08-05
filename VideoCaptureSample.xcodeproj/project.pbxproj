@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E520A5C24DA4386007D7226 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5EEA79D824DA3F0700AE809E /* VideoCaptureSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoCaptureSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EEA79DB24DA3F0700AE809E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EEA79DD24DA3F0700AE809E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -39,6 +40,7 @@
 		5EEA79CF24DA3F0600AE809E = {
 			isa = PBXGroup;
 			children = (
+				5E520A5C24DA4386007D7226 /* README.md */,
 				5EEA79DA24DA3F0700AE809E /* VideoCaptureSample */,
 				5EEA79D924DA3F0700AE809E /* Products */,
 			);
